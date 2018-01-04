@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "",
+    "Description": "My first CloudFormation script",
     "Metadata": {},
     "Parameters": {},
     "Mappings": {},
