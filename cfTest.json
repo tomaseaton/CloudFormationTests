@@ -1,10 +1,62 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "My first CloudFormation script",
-    "Metadata": {},
-    "Parameters": {},
-    "Mappings": {},
-    "Conditions": {},
-    "Resources": {},
-    "Outputs": {}
+    "Resources": {
+        "MyLambdaExecutionRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Path": "/",
+                "RoleName": "SmgLambdaExecutionRole",
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AmazonSQSFullAccess",
+                    "arn:aws:iam::aws:policy/AmazonKinesisReadOnlyAccess"
+                ]
+            }
+        },
+        "s3Bucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "AccessControl": "PublicRead",
+                "BucketName": "TomasS3Bucket"
+            }
+        },
+        "lambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Description": "My first lambda function from within CF script",
+                "Code": {
+                    "S3Bucket": "TomasS3Bucket"
+                },
+                "Handler": "",
+                "Role": "",
+                "Runtime": "",
+                "FunctionName": "",
+                "MemorySize": 128,
+                "Timeout": 5,
+                "KmsKeyArn": "",
+                "Environment": {
+                    "Variables": {
+                        "": "",
+                        "": ""
+                    }
+                }
+            }
+        }
+    }
 }
