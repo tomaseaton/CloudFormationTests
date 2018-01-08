@@ -52,7 +52,6 @@
                 "KmsKeyArn": "",
                 "Environment": {
                     "Variables": {
-                        "": "",
                         "": ""
                     }
                 }
